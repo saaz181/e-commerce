@@ -54,7 +54,7 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand waves-effect" href="{% url 'item_list' %}">
+      <a class="navbar-brand waves-effect" href="{% url 'core:home' %}">
         <strong class="blue-text">E-commerce</strong>
       </a>
 
@@ -70,15 +70,15 @@
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% url 'item_list' %}">Home
+            <a class="nav-link waves-effect" href="{% url 'core:home' %}">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
+          {% comment %} <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'product:slug' %}">Product</a>
+          </li> {% endcomment %}
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% url 'product' %}">Product</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% url 'check_out' %}">Checkout</a>
+            <a class="nav-link waves-effect" href="{% url 'core:checkout' %}">Checkout</a>
           </li>
         </ul>
 
@@ -116,13 +116,12 @@
 
     <!--Call to action-->
     <div class="pt-4">
-      <a class="btn btn-outline-white" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank"
-        role="button">Download MDB
-        <i class="fas fa-download ml-2"></i>
+      <a class="btn btn-outline-white" href="#"
+        role="button">Join Customers Club  &#x1F465;
+        
       </a>
-      <a class="btn btn-outline-white" href="https://mdbootstrap.com/education/bootstrap/" target="_blank" role="button">Start
-        free tutorial
-        <i class="fas fa-graduation-cap ml-2"></i>
+      <a class="btn btn-outline-white" href="#" role="button">Check Where is Your Product &#x1F9D0;
+        
       </a>
     </div>
     <!--/.Call to action-->
