@@ -221,7 +221,13 @@
                 </h5>
 
                 <h4 class="font-weight-bold blue-text">
-                  <strong>${{item.price}}</strong>
+                  <strong>$
+                  {% if item.discount_price %}
+                    {{item.discount_price}}
+                  {% else %}  
+                    {{item.price}}
+                  {% endif %}
+                  </strong>
                 </h4>
 
               </div>
