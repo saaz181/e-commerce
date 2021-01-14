@@ -1,3 +1,4 @@
+ {% load cart_template_tags %}
  <!-- Navbar -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
     <div class="container">
@@ -18,38 +19,46 @@
 
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
+          {% comment %} <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'core:home' %}">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
           {% comment %} <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'product:slug' %}">Product</a>
-          </li> {% endcomment %}
+          </li> 
           <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'core:checkout' %}">Checkout</a>
-          </li>
+          </li> {% endcomment %}
         </ul>
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
+          {% if request.user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link waves-effect">
-              <span class="badge red z-depth-1 mr-1"> 0 </span>
+            <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
+              <span class="badge red z-depth-1 mr-1"> {{request.user | cart_item_count}} </span>
               <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Cart </span>
             </a>
+            <li class="nav-item">
+            <a class="nav-link waves-effect", href="{% url 'account_logout' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Logout </span>
+            </a>
           </li>
+          </li>
+          {% else %}
           <li class="nav-item">
-            <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
-              <i class="fab fa-facebook-f"></i>
+            <a class="nav-link waves-effect", href="{% url 'account_login' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Login </span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://twitter.com/MDBootstrap" class="nav-link waves-effect" target="_blank">
-              <i class="fab fa-twitter"></i>
+            <a class="nav-link waves-effect", href="{% url 'account_signup' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Signup </span>
             </a>
           </li>
+          {% endif %}
         </ul>
 
       </div>
