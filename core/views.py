@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon, Refund
+from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund
 from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
@@ -81,12 +81,13 @@ class CheckoutView(View):
                 # save_info = form.cleaned_data("save_info")
                 
                 payment_option = form.cleaned_data.get("payment_option")
-                billing_address = BillingAddress(
+                billing_address = Address(
                     user=self.request.user,
                     street_address=street_address,
                     apartment_address=apartment_address,
                     country=country,
-                    zip=zip
+                    zip=zip,
+                    address_type="B"
                     )
                 billing_address.save()
                 order.billing_address = billing_address

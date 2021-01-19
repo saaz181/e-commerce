@@ -55,7 +55,8 @@ ROOT_URLCONF = 'ecommerce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),
+                os.path.join(BASE_DIR, 'templates', 'account'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,7 +84,8 @@ DATABASES = {
 
 STRIPE_PUBLIC_KEY = config('STRIPE_TEST_PUBLIC_KEY')
 STRIPE_SECRET_KEY = config('STRIPE_TEST_SECRET_KEY')
-
+STRIPE_PUBLIC_KEY = config('STRIPE_LIVE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_LIVE_SECRET_KEY')
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = "/"
@@ -131,4 +133,9 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
 
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
