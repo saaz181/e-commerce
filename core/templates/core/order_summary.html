@@ -50,29 +50,44 @@
         </td>
     </tr>
     {% endfor %}
+    
     {% if object.coupon %}
        <tr>
         <td colspan="4"><b> Coupon </b></td>
+        {% if object.get_total > 0 %}
         <td><b>-${{ object.coupon.amount }}</b></td>
+        {% else %}
+        <td><b style="color: red;"> {{ object.coupon.code }}</b></td>
+        {% endif %}
     </tr>
     {% endif %}
-    {% if object.get_total %}
-    <tr>
-        <td colspan="4"><b> Order Total </b></td>
-        <td><b>${{ object.get_total }}</b></td>
-    </tr>
+    
+    {% if object.get_total and not empty %}
+        {% if  object.get_total > 0 %}
+        <tr>
+            <td colspan="4"><b> Order Total </b></td>
+            <td><b>${{ object.get_total }}</b></td>
+        </tr>
+        {% endif %}
+
+        {% if  object.get_total <= 0 %}
+        <tr>
+            <td colspan="4"><b> Order Total </b></td>
+            <td><b style="color: green;">Free</b></td>
+        </tr>
+        {% endif %}
+        
     <tr>
         <td colspan="5">
         <a class="btn btn-warning float-right ml-2" href="{% url 'core:checkout' %}"> Proceed To Checkout </a>
         <a class="btn btn-primary float-right" href="/"> Continue shopping </a>
         </td>
     </tr>
+    
     {% endif %}
   </tbody>
 </table> 
 
-      
-      
      
     </div>
   </main>

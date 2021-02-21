@@ -2,29 +2,17 @@
 {% block title %}Checkout{% endblock %}
 {% block content %}
 {% load crispy_forms_tags %}
-  <!--Main layout-->
   <main>
     <div class="container wow fadeIn">
 
-      <!-- Heading -->
       <h2 class="my-5 h2 text-center">Checkout form</h2>
 
-      <!--Grid row-->
       <div class="row">
 
-        <!--Grid column-->
         <div class="col-md-8 mb-4">
 
-          <!--Card-->
           <div class="card">
 
-            {% comment %} <form method='post'>
-              {% csrf_token %}
-              {{ form | crispy }}
-              <button class="btn btn-primary" type='submit'>Checkout</button>
-            </form> {% endcomment %}
-
-            <!--Card content-->
             <form method="POST" class="card-body">
               {% csrf_token %}
                 <h3> Shipping Address </h3>
@@ -32,7 +20,7 @@
               <div class="hideable_shipping_form">
             
               <div class="md-form mb-5 pt-2">
-                <input type="text" id="shipping_address" class="form-control" placeholder="1234 Main St" name="shipping_address" class="form-control"/>
+                <input type="text" id="shipping_address" placeholder="1234 Main St" name="shipping_address" class="form-control"/>
                 <label for="shipping_address" class="">Address</label>
               </div>
 
@@ -42,46 +30,22 @@
                 <label for="shipping_address2" class="">Address 2 (optional)</label>
               </div>
 
-              <!--Grid row-->
               <div class="row">
 
-                <!--Grid column-->
                 <div class="col-lg-4 col-md-12 mb-4">
 
-                  <label for="country">Country</label>
-                  {% comment %} <select class="custom-select d-block w-100" id="country" required>
-                    <option value="">Choose...</option>
-                    <option>United States</option>
-                  </select> {% endcomment %}
+                  <label for="shipping_country">Country</label>
                     {{ form.shipping_country }}
                   <div class="invalid-feedback">
                     Please select a valid country.
                   </div>
 
                 </div>
-                <!--Grid column-->
-
-                {% comment %} <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
-
-                  <label for="state">State</label>
-                  <select class="custom-select d-block w-100" id="state" required>
-                    <option value="">Choose...</option>
-                    <option>California</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Please provide a valid state.
-                  </div>
-
-                </div>
-                <!--Grid column--> {% endcomment %}
-
-                <!--Grid column-->
                 <div class="col-lg-4 col-md-6 mb-4">
 
                   <label for="shipping_zip">Zip</label>
                   <input type="text" class="form-control" id="shipping_zip" placeholder="Zip code" name="shipping_zip">
-                  {% comment %} {{ form.zip }} {% endcomment %}
+
                   <div class="invalid-feedback">
                     Zip code required.
                     </div>
@@ -115,120 +79,77 @@
               <div class="hideable_shipping_form">
             
               <div class="md-form mb-5 pt-2">
-                {% comment %} <input type="text" id="address" class="form-control" placeholder="1234 Main St"> {% endcomment %}
-                {{  form.street_address }}
-                <label for="address" class="">Address</label>
+                <input type="text" id="billing_address" name="billing_address" class="form-control" placeholder="1234 Main St">
+                <label for="billing_address" class="">Address</label>
               </div>
 
               <!--address-2-->
               <div class="md-form mb-5 pt-2">
-                {% comment %} <input type="text" id="address-2" class="form-control" placeholder="Apartment or suite"> {% endcomment %}
-                {{ form.apartment_address }}
-                <label for="address-2" class="">Address 2 (optional)</label>
+                <input type="text" id="billing_address2" name="billing_address2" class="form-control" placeholder="Apartment or suite">
+                <label for="billing_address2" class="">Address 2 (optional)</label>
               </div>
 
-              <!--Grid row-->
               <div class="row">
 
-                <!--Grid column-->
                 <div class="col-lg-4 col-md-12 mb-4">
 
-                  <label for="country">Country</label>
-                  {% comment %} <select class="custom-select d-block w-100" id="country" required>
-                    <option value="">Choose...</option>
-                    <option>United States</option>
-                  </select> {% endcomment %}
-                    {{ form.country }}
+                  <label for="billing_country">Country</label>
+                    {{ form.billing_country }}
                   <div class="invalid-feedback">
                     Please select a valid country.
                   </div>
 
                 </div>
-                <!--Grid column-->
-
-                {% comment %} <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
-
-                  <label for="state">State</label>
-                  <select class="custom-select d-block w-100" id="state" required>
-                    <option value="">Choose...</option>
-                    <option>California</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Please provide a valid state.
-                  </div>
-
-                </div>
-                <!--Grid column--> {% endcomment %}
-
-                <!--Grid column-->
+                
                 <div class="col-lg-4 col-md-6 mb-4">
 
                   <label for="zip">Zip</label>
-                  {% comment %} <input type="text" class="form-control" id="zip" placeholder="" required> {% endcomment %}
-                  {{ form.zip }}
+                  <input type="text" class="form-control" id="billing_zip" name="billing_zip" placeholder="Zip Code">
                   <div class="invalid-feedback">
                     Zip code required.
                   </div>
 
                 </div>
-                <!--Grid column-->
-
               </div>
-              <!--Grid row-->
             </div>
               <hr>
             
-
+    
               <div class="custom-control custom-checkbox">
-                <input {% if form.same_Shipping_address.value %}checked{% endif %} type="checkbox" name="same_billing_address" class="custom-control-input" id="same-address">
-                <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+                <input type="checkbox" name="use_default_billing" class="custom-control-input" id="use_default_billing">
+                <label class="custom-control-label" for="use_default_billing">use default billing address </label>
               </div>
 
               <div class="custom-control custom-checkbox">
-                <input {% if form.save_info.value %}checked{% endif %} type="checkbox" name="save_info" class="custom-control-input" id="save-info">
-                <label class="custom-control-label" for="save-info">Save this information for next time</label>
+                <input type="checkbox" name="set_default_billing" class="custom-control-input" id="set_default_billing">
+                <label class="custom-control-label" for="set_default_billing">Save this information for next time</label>
               </div>
-
 
               <hr>
-              <h3> Payment option </h3>
 
+              <h3> Payment option </h3>
               <div class="d-block my-3">
               {% for value, name in form.fields.payment_option.choices %}
                 <div class="custom-control custom-radio">
                   <input id="{{ name }}" name="payment_option" value={{ value }} type="radio" class="custom-control-input" required>
                   <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
-                  {% comment %} {{ form.payment_option }} {% endcomment %}
                 </div>
                 {% endfor %}
                 
               </div>
              
-              
               <hr class="mb-4">
               <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
 
             </form>
-
           </div>
-          <!--/.Card-->
-
         </div>
-        <!--Grid column-->
 
-        <!--Grid column-->
         <div class="col-md-4 mb-4">
           {% include 'core/order_snippet.html' %}
 
         </div>
-        <!--Grid column-->
-
       </div>
-      <!--Grid row-->
-
     </div>
   </main>
-  <!--Main layout-->
-
 {% endblock %}
